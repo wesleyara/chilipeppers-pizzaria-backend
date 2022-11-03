@@ -10,30 +10,33 @@
   <body>
     <form
       class="container"
-      action="/api/v1/status"
+      action="/api/v1/static"
       method="post"
-      enctype="application/x-www-form-urlencoded"
+      enctype="multipart/form-data"
     >
       <h1>Adicionar um novo item</h1>
       <div class="content">
-        <input type="password" placeholder="Nome" name="name" />
+        <input type="text" placeholder="Nome" name="name" required />
 
         <textarea
           name="description"
           placeholder="Descrição"
           cols="30"
           rows="10"
+          required
         ></textarea>
 
-        <input type="number" placeholder="Preço pizza P" name="p" />
+        <input type="file" name="image" accept=".png,.jpg,.jpeg" required />
 
-        <input type="number" placeholder="Preço pizza M" name="m" />
+        <input type="number" placeholder="Preço pizza P" name="p" required />
 
-        <input type="number" placeholder="Preço pizza G" name="g" />
+        <input type="number" placeholder="Preço pizza M" name="m" required />
 
-        <input type="number" placeholder="Preço pizza GG" name="gg" />
+        <input type="number" placeholder="Preço pizza G" name="g" required />
 
-        <input type="password" placeholder="Senha" name="key" />
+        <input type="number" placeholder="Preço pizza GG" name="gg" required />
+
+        <input type="password" placeholder="Senha" name="key" required />
 
         <button type="submit">Enviar</button>
       </div>
