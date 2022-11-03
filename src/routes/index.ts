@@ -19,7 +19,7 @@ routes.get("/static", (_, res) => {
 
 routes.post(
   "/api/v1/items",
-  upload.array("image"),
+  upload.single("image"),
   async (req: any, res: any) => {
     const { name, description, p, m, g, gg, key } = req.body;
 
@@ -29,21 +29,33 @@ routes.post(
       });
     }
 
-    if (!name || !description || !p || !m || !g || !gg) {
+    if (
+      name.trim() === "" ||
+      description.trim() === "" ||
+      p.trim() === "" ||
+      m.trim() === "" ||
+      g.trim() === "" ||
+      gg.trim() === "" ||
+      !req.file
+    ) {
       return res.status(400).json({
         error: "Missing fields",
       });
     }
 
+    const filepathReplace = req.file.location
+      .replace("chilipeppers.", "")
+      .replace("us-east-1.", "");
+
     const item = await prisma.item.create({
       data: {
         name,
-        image: req.files[0].location,
+        image: filepathReplace,
         description,
-        priceSmall: p,
-        priceMedium: m,
-        priceLarge: g,
-        priceXLarge: gg,
+        priceSmall: parseFloat(p),
+        priceMedium: parseFloat(m),
+        priceLarge: parseFloat(g),
+        priceXLarge: parseFloat(gg),
       },
     });
 
