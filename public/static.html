@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/globals.css" />
+    <title>WAX Lag</title>
+  </head>
+  <body>
+    <form
+      class="container"
+      action="/api/v1/status"
+      method="post"
+      enctype="application/x-www-form-urlencoded"
+    >
+      <h1>Adicionar um novo item</h1>
+      <div class="content">
+        <input type="password" placeholder="Nome" name="name" />
+
+        <textarea
+          name="description"
+          placeholder="Descrição"
+          cols="30"
+          rows="10"
+        ></textarea>
+
+        <input type="password" placeholder="Preço pizza P" name="p" />
+
+        <input type="password" placeholder="Preço pizza M" name="m" />
+
+        <input type="password" placeholder="Preço pizza G" name="g" />
+
+        <input type="password" placeholder="Preço pizza GG" name="gg" />
+
+        <input type="password" placeholder="Senha" name="key" />
+
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+  </body>
+</html>

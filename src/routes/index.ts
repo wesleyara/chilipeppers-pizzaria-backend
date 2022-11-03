@@ -4,7 +4,7 @@ import path from "path";
 
 export const routes = express.Router();
 
-const basepath = path.join(__dirname, "../../public/status.html");
+const basepath = path.join(__dirname, "../../public/static.html");
 
 routes.get("/", (_, res) => {
   res.json({
@@ -17,7 +17,7 @@ routes.get("/status", (_, res) => {
 });
 
 routes.post("/api/v1/status", async (req, res) => {
-  const { status, key } = req.body;
+  const { name, description, p, m, g, gg, key } = req.body;
 
   if (key.trim() !== process.env.SECRET_KEY) {
     return res.status(401).json({
@@ -25,24 +25,13 @@ routes.post("/api/v1/status", async (req, res) => {
     });
   }
 
-  const data = await prisma.status.findMany();
-
-  data.length === 0
-    ? await prisma.status.create({
-        data: { status },
-      })
-    : await prisma.status.update({
-        where: { status: data[0].status },
-        data: { status },
-      });
-
   res.json({
-    message: "Updated status, check all sites.",
+    message: "Updated database.",
   });
 });
 
 routes.get("/api/v1/status", async (_, res) => {
-  const data = await prisma.status.findMany();
+  const data = await prisma.item.findMany();
 
   res.json(data);
 });
